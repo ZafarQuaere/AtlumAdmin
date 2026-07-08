@@ -63,7 +63,7 @@ export default function LoginPage() {
     <Card className="w-full max-w-md animate-fade-in">
       <CardHeader className="text-center">
         <div className="mb-2">
-          <h1 className="text-2xl font-bold text-emerald-600">Emerald Admin</h1>
+          <h1 className="text-2xl font-bold text-brand-600">Atlum Admin</h1>
           <p className="text-xs text-muted-foreground">Enterprise Console</p>
         </div>
         <CardTitle>Sign in to your account</CardTitle>
@@ -91,7 +91,7 @@ export default function LoginPage() {
               <Label htmlFor="password">Password</Label>
               <Link
                 href="/forgot-password"
-                className="text-sm text-emerald-600 hover:underline"
+                className="text-sm text-brand-600 hover:underline"
               >
                 Forgot password?
               </Link>

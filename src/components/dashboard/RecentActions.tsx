@@ -67,7 +67,7 @@ export function RecentActions({ actions, loading }: RecentActionsProps) {
             return (
               <div key={action.id} className="flex items-start gap-3">
                 <div className="rounded-full bg-primary-container p-2">
-                  <Icon className="h-4 w-4 text-emerald-600" />
+                  <Icon className="h-4 w-4 text-brand-600" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium leading-tight">
@@ -89,7 +89,7 @@ export function RecentActions({ actions, loading }: RecentActionsProps) {
             );
           })}
         </div>
-        <button className="mt-4 text-sm font-medium text-emerald-600 hover:underline">
+        <button className="mt-4 text-sm font-medium text-brand-600 hover:underline">
           View All Actions
         </button>
       </CardContent>

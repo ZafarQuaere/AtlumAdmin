@@ -32,7 +32,7 @@ export function ProductivityChart({ data }: ProductivityChartProps) {
             size="sm"
             className={cn(
               "h-7 px-3 text-xs",
-              period === "week" && "bg-emerald-600 text-white hover:bg-emerald-600"
+              period === "week" && "bg-brand-600 text-white hover:bg-brand-600"
             )}
             onClick={() => setPeriod("week")}
           >
@@ -43,7 +43,7 @@ export function ProductivityChart({ data }: ProductivityChartProps) {
             size="sm"
             className={cn(
               "h-7 px-3 text-xs",
-              period === "month" && "bg-emerald-600 text-white hover:bg-emerald-600"
+              period === "month" && "bg-brand-600 text-white hover:bg-brand-600"
             )}
             onClick={() => setPeriod("month")}
           >

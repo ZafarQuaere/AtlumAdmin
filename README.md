@@ -1,4 +1,4 @@
-# Emerald Admin - Atlum Work OS
+# Atlum Admin - Atlum Work OS
 
 Enterprise admin console for managing employees, roles, permissions, and organizational settings.
 
@@ -15,7 +15,7 @@ Enterprise admin console for managing employees, roles, permissions, and organiz
 
 ## Bootstrap Admin Login
 
-Default Emerald Admin credentials (stored in Supabase Auth):
+Default Atlum Admin credentials (stored in Supabase Auth):
 
 | Field | Value |
 |-------|-------|
@@ -136,10 +136,10 @@ src/
 
 ## Theme
 
-Uses the Emerald palette from AtlumApp:
+Uses the Atlum brand palette from AtlumApp:
 
 - Primary: `#10B981`
-- Emerald Admin: `#006638`
+- Atlum Admin brand: `#006638`
 - Font: Hanken Grotesk
 
 ## License

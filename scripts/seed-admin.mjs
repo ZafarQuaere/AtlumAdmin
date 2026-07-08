@@ -66,7 +66,7 @@ async function seedAdmin() {
         password,
         email_confirm: true,
         app_metadata: { role: "admin" },
-        user_metadata: { full_name: "Emerald Admin" },
+        user_metadata: { full_name: "Atlum Admin" },
       }
     );
 
@@ -77,7 +77,7 @@ async function seedAdmin() {
 
     const { error: profileError } = await supabase
       .from("profiles")
-      .update({ role: "admin", full_name: "Emerald Admin" })
+      .update({ role: "admin", full_name: "Atlum Admin" })
       .eq("id", existing.id);
 
     if (profileError) {
@@ -94,7 +94,7 @@ async function seedAdmin() {
     password,
     email_confirm: true,
     app_metadata: { role: "admin" },
-    user_metadata: { full_name: "Emerald Admin" },
+    user_metadata: { full_name: "Atlum Admin" },
   });
 
   if (error) {
@@ -106,7 +106,7 @@ async function seedAdmin() {
   if (userId) {
     await supabase
       .from("profiles")
-      .update({ role: "admin", full_name: "Emerald Admin" })
+      .update({ role: "admin", full_name: "Atlum Admin" })
       .eq("id", userId);
   }
 

@@ -45,7 +45,7 @@ export function Sidebar({ open = true, onClose }: SidebarProps) {
       >
         <div className="flex items-center justify-between p-6 lg:block">
           <div>
-            <h1 className="text-lg font-bold text-emerald-600">Emerald Admin</h1>
+            <h1 className="text-lg font-bold text-brand-600">Atlum Admin</h1>
             <p className="text-xs font-medium text-sidebar-foreground opacity-70">
               Enterprise Console
             </p>

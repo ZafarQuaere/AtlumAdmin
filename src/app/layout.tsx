@@ -12,7 +12,7 @@ const hankenGrotesk = Hanken_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Emerald Admin | Atlum Work OS",
+  title: "Atlum Admin | Atlum Work OS",
   description: "Enterprise admin console for Atlum Work OS",
 };
 

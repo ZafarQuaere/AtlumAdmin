@@ -21,8 +21,8 @@ export function QuickStartCard() {
         </div>
         <div className="flex h-32 w-full shrink-0 items-center justify-center rounded-xl bg-primary-container sm:h-40 sm:w-48">
           <div className="text-center">
-            <Upload className="mx-auto h-12 w-12 text-emerald-600 opacity-60" />
-            <p className="mt-2 text-xs font-medium text-emerald-600">
+            <Upload className="mx-auto h-12 w-12 text-brand-600 opacity-60" />
+            <p className="mt-2 text-xs font-medium text-brand-600">
               Excel Import Engine
             </p>
           </div>

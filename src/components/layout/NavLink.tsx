@@ -24,7 +24,7 @@ export function NavLink({ href, icon: Icon, label, onClick }: NavLinkProps) {
       className={cn(
         "flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium transition-colors",
         isActive
-          ? "bg-sidebar-active text-emerald-600 opacity-90"
+          ? "bg-sidebar-active text-brand-600 opacity-90"
           : "text-sidebar-foreground hover:bg-sidebar-active/50"
       )}
     >

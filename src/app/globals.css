@@ -14,9 +14,9 @@
   --primary-light: #34d399;
   --primary-muted: #6ee7b7;
   --primary-container: #d1fae5;
-  --emerald-600: #006638;
-  --emerald-500: #10b981;
-  --emerald-400: #34d399;
+  --brand-600: #006638;
+  --brand-500: #10b981;
+  --brand-400: #34d399;
   --secondary: #f3f4f6;
   --secondary-foreground: #3e4940;
   --muted: #f3f4f5;
@@ -78,9 +78,9 @@
   --color-primary-light: var(--primary-light);
   --color-primary-muted: var(--primary-muted);
   --color-primary-container: var(--primary-container);
-  --color-emerald-600: var(--emerald-600);
-  --color-emerald-500: var(--emerald-500);
-  --color-emerald-400: var(--emerald-400);
+  --color-brand-600: var(--brand-600);
+  --color-brand-500: var(--brand-500);
+  --color-brand-400: var(--brand-400);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);

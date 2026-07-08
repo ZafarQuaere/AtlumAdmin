@@ -44,7 +44,7 @@ export function StatsCards({ stats, loading }: StatsCardProps) {
             </div>
           </div>
           <div className="rounded-lg bg-primary-container p-3">
-            <Users className="h-5 w-5 text-emerald-600" />
+            <Users className="h-5 w-5 text-brand-600" />
           </div>
         </CardContent>
       </Card>
@@ -81,7 +81,7 @@ export function StatsCards({ stats, loading }: StatsCardProps) {
               <p className="text-sm text-muted-foreground">Uptime</p>
             </div>
             <div className="rounded-lg bg-primary-container p-3">
-              <Activity className="h-5 w-5 text-emerald-600" />
+              <Activity className="h-5 w-5 text-brand-600" />
             </div>
           </div>
           <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">

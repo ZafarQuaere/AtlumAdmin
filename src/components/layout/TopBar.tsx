@@ -43,8 +43,8 @@ export function TopBar({ onMenuClick }: TopBarProps) {
         <Menu className="h-5 w-5" />
       </button>
 
-      <h2 className="hidden text-base font-semibold text-emerald-600 sm:block">
-        Emerald Productivity System
+      <h2 className="hidden text-base font-semibold text-brand-600 sm:block">
+        Atlum Admin
       </h2>
 
       <div className="relative mx-auto hidden max-w-md flex-1 md:block">
