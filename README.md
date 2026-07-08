@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Emerald Admin - Atlum Work OS
+
+Enterprise admin console for managing employees, roles, permissions, and organizational settings.
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **UI Components**: shadcn/ui (Radix UI)
+- **Authentication**: Supabase Auth
+- **Database**: Supabase PostgreSQL
+- **Charts**: Recharts
+- **Deployment**: Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm
+- Supabase account (free tier)
+
+### Installation
+
+```bash
+cd AtlumAdmin
+npm install
+```
+
+### Environment Variables
+
+Copy `.env.example` to `.env.local` and fill in your Supabase credentials:
+
+```bash
+cp .env.example .env.local
+```
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+```
+
+### Database Setup
+
+Run the SQL schema in your Supabase SQL Editor:
+
+```bash
+# File: supabase/schema.sql
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── (auth)/          # Login, forgot password
+│   ├── (dashboard)/     # Protected admin pages
+│   └── layout.tsx       # Root layout
+├── components/
+│   ├── ui/              # shadcn/ui primitives
+│   ├── layout/          # Sidebar, TopBar, NavLink
+│   ├── dashboard/       # Dashboard widgets
+│   └── providers/       # Auth, Theme, Toast
+├── lib/
+│   ├── supabase/        # Supabase clients
+│   ├── hooks/           # Data fetching hooks
+│   └── actions/         # Server actions
+└── types/               # TypeScript types
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment (Vercel)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push to GitHub
+2. Import project in [Vercel](https://vercel.com)
+3. Set environment variables in Vercel dashboard
+4. Deploy
 
-## Deploy on Vercel
+## Theme
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Uses the Emerald palette from AtlumApp:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Primary: `#10B981`
+- Emerald Admin: `#006638`
+- Font: Hanken Grotesk
+
+## License
+
+Private - Atlum Work OS

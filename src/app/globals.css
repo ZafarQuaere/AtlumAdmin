@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8f9fa;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+  --primary: #10b981;
+  --primary-foreground: #ffffff;
+  --primary-dark: #047857;
+  --primary-deeper: #064e3b;
+  --primary-light: #34d399;
+  --primary-muted: #6ee7b7;
+  --primary-container: #d1fae5;
+  --emerald-600: #006638;
+  --emerald-500: #10b981;
+  --emerald-400: #34d399;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #3e4940;
+  --muted: #f3f4f5;
+  --muted-foreground: #6b7280;
+  --accent: #d9e5df;
+  --accent-foreground: #006638;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e5e7eb;
+  --border-sidebar: #becabe;
+  --input: #e5e7eb;
+  --ring: #10b981;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+  --sidebar: #f3f4f5;
+  --sidebar-foreground: #3e4940;
+  --sidebar-active: #d9e5df;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: #121212;
+  --foreground: #f9fafb;
+  --card: #1a1f24;
+  --card-foreground: #f9fafb;
+  --popover: #1a1f24;
+  --popover-foreground: #f9fafb;
+  --primary: #10b981;
+  --primary-foreground: #ffffff;
+  --secondary: #252b32;
+  --secondary-foreground: #9ca3af;
+  --muted: #1a1f24;
+  --muted-foreground: #9ca3af;
+  --accent: #064e3b;
+  --accent-foreground: #34d399;
+  --destructive: #ef4444;
+  --border: #374151;
+  --border-sidebar: #374151;
+  --input: #374151;
+  --ring: #10b981;
+  --sidebar: #1a1f24;
+  --sidebar-foreground: #9ca3af;
+  --sidebar-active: #064e3b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-deeper: var(--primary-deeper);
+  --color-primary-light: var(--primary-light);
+  --color-primary-muted: var(--primary-muted);
+  --color-primary-container: var(--primary-container);
+  --color-emerald-600: var(--emerald-600);
+  --color-emerald-500: var(--emerald-500);
+  --color-emerald-400: var(--emerald-400);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-sidebar: var(--border-sidebar);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-active: var(--sidebar-active);
+  --font-sans: var(--font-hanken);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-hanken), system-ui, sans-serif;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--muted) 25%,
+    var(--secondary) 50%,
+    var(--muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
