@@ -9,9 +9,20 @@ Enterprise admin console for managing employees, roles, permissions, and organiz
 - **Styling**: Tailwind CSS v4
 - **UI Components**: shadcn/ui (Radix UI)
 - **Authentication**: Supabase Auth
-- **Database**: Supabase PostgreSQL
+- **Database**: Supabase PostgreSQL (project: `AtlumWorkOS`)
 - **Charts**: Recharts
 - **Deployment**: Vercel
+
+## Bootstrap Admin Login
+
+Default Emerald Admin credentials (stored in Supabase Auth):
+
+| Field | Value |
+|-------|-------|
+| Email | `zafima20@gmail.com` |
+| Password | `Atlum@1234` |
+
+The login page pre-fills the email via `NEXT_PUBLIC_DEFAULT_ADMIN_EMAIL`. The password is never stored in source code — only in Supabase Auth.
 
 ## Getting Started
 
@@ -26,29 +37,37 @@ Enterprise admin console for managing employees, roles, permissions, and organiz
 ```bash
 cd AtlumAdmin
 npm install
+cp .env.example .env.local
 ```
 
 ### Environment Variables
 
-Copy `.env.example` to `.env.local` and fill in your Supabase credentials:
-
-```bash
-cp .env.example .env.local
-```
-
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
+SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
+NEXT_PUBLIC_DEFAULT_ADMIN_EMAIL=zafima20@gmail.com
+
+# Local-only for npm run seed:admin
+SEED_ADMIN_EMAIL=zafima20@gmail.com
+SEED_ADMIN_PASSWORD=<bootstrap-password>
 ```
+
+Get keys from Supabase Dashboard → Project Settings → API.
 
 ### Database Setup
 
-Run the SQL schema in your Supabase SQL Editor:
+Schema is applied via Supabase migrations. To re-apply manually, run [`supabase/schema.sql`](supabase/schema.sql) in the SQL Editor.
+
+### Seed Admin User (optional, local)
+
+If you need to recreate the bootstrap admin:
 
 ```bash
-# File: supabase/schema.sql
+npm run seed:admin
 ```
+
+Requires `SUPABASE_SERVICE_ROLE_KEY` and `SEED_ADMIN_PASSWORD` in `.env.local`.
 
 ### Development
 
@@ -56,7 +75,7 @@ Run the SQL schema in your Supabase SQL Editor:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). Unauthenticated users are redirected to `/login`.
 
 ### Build
 
@@ -64,6 +83,34 @@ Open [http://localhost:3000](http://localhost:3000).
 npm run build
 npm start
 ```
+
+## Deploy to Vercel (GitHub)
+
+1. Push this repo to GitHub: `ZafarQuaere/AtlumAdmin`
+2. Go to [vercel.com/new](https://vercel.com/new)
+3. Import `ZafarQuaere/AtlumAdmin`
+4. Framework: **Next.js** (auto-detected)
+5. Add environment variables (Production + Preview):
+
+| Variable | Value |
+|----------|-------|
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://sbfgtghdekbrcentdweo.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Your service role key (server-only) |
+| `NEXT_PUBLIC_DEFAULT_ADMIN_EMAIL` | `zafima20@gmail.com` |
+
+6. Deploy
+
+**Do not** add `SEED_ADMIN_PASSWORD` to Vercel — seeding is a one-time local operation.
+
+### Supabase Auth Redirect URLs
+
+In Supabase Dashboard → Authentication → URL Configuration:
+
+- **Site URL**: `https://<your-vercel-domain>`
+- **Redirect URLs**: `https://<your-vercel-domain>/**`
+
+Also add `http://localhost:3000/**` for local development.
 
 ## Project Structure
 
@@ -82,15 +129,10 @@ src/
 │   ├── supabase/        # Supabase clients
 │   ├── hooks/           # Data fetching hooks
 │   └── actions/         # Server actions
+├── scripts/
+│   └── seed-admin.mjs   # Bootstrap admin user
 └── types/               # TypeScript types
 ```
-
-## Deployment (Vercel)
-
-1. Push to GitHub
-2. Import project in [Vercel](https://vercel.com)
-3. Set environment variables in Vercel dashboard
-4. Deploy
 
 ## Theme
 

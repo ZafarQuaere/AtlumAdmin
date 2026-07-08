@@ -38,6 +38,10 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: process.env.NEXT_PUBLIC_DEFAULT_ADMIN_EMAIL ?? "",
+      password: "",
+    },
   });
 
   const onSubmit = async (data: LoginForm) => {

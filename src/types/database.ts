@@ -6,136 +6,36 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
-      profiles: {
-        Row: {
-          id: string;
-          email: string;
-          full_name: string | null;
-          avatar_url: string | null;
-          role: "admin" | "manager" | "employee";
-          department: string | null;
-          organization_id: string | null;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id: string;
-          email: string;
-          full_name?: string | null;
-          avatar_url?: string | null;
-          role?: "admin" | "manager" | "employee";
-          department?: string | null;
-          organization_id?: string | null;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: string;
-          email?: string;
-          full_name?: string | null;
-          avatar_url?: string | null;
-          role?: "admin" | "manager" | "employee";
-          department?: string | null;
-          organization_id?: string | null;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "profiles_organization_id_fkey";
-            columns: ["organization_id"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
-      organizations: {
-        Row: {
-          id: string;
-          name: string;
-          settings: Json;
-          created_at: string;
-          updated_at: string;
-        };
-        Insert: {
-          id?: string;
-          name: string;
-          settings?: Json;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Update: {
-          id?: string;
-          name?: string;
-          settings?: Json;
-          created_at?: string;
-          updated_at?: string;
-        };
-        Relationships: [];
-      };
-      roles: {
-        Row: {
-          id: string;
-          name: string;
-          permissions: Json;
-          organization_id: string | null;
-          created_at: string;
-        };
-        Insert: {
-          id?: string;
-          name: string;
-          permissions?: Json;
-          organization_id?: string | null;
-          created_at?: string;
-        };
-        Update: {
-          id?: string;
-          name?: string;
-          permissions?: Json;
-          organization_id?: string | null;
-          created_at?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "roles_organization_id_fkey";
-            columns: ["organization_id"];
-            isOneToOne: false;
-            referencedRelation: "organizations";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
       activity_logs: {
         Row: {
-          id: string;
-          user_id: string | null;
           action_type: string;
-          description: string;
           category: string | null;
-          metadata: Json;
-          created_at: string;
+          created_at: string | null;
+          description: string;
+          id: string;
+          metadata: Json | null;
+          user_id: string | null;
         };
         Insert: {
-          id?: string;
-          user_id?: string | null;
           action_type: string;
-          description: string;
           category?: string | null;
-          metadata?: Json;
-          created_at?: string;
+          created_at?: string | null;
+          description: string;
+          id?: string;
+          metadata?: Json | null;
+          user_id?: string | null;
         };
         Update: {
-          id?: string;
-          user_id?: string | null;
           action_type?: string;
-          description?: string;
           category?: string | null;
-          metadata?: Json;
-          created_at?: string;
+          created_at?: string | null;
+          description?: string;
+          id?: string;
+          metadata?: Json | null;
+          user_id?: string | null;
         };
         Relationships: [
           {
@@ -147,11 +47,114 @@ export interface Database {
           },
         ];
       };
+      organizations: {
+        Row: {
+          created_at: string | null;
+          id: string;
+          name: string;
+          settings: Json | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          created_at?: string | null;
+          id?: string;
+          name: string;
+          settings?: Json | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          created_at?: string | null;
+          id?: string;
+          name?: string;
+          settings?: Json | null;
+          updated_at?: string | null;
+        };
+        Relationships: [];
+      };
+      profiles: {
+        Row: {
+          avatar_url: string | null;
+          created_at: string | null;
+          department: string | null;
+          email: string;
+          full_name: string | null;
+          id: string;
+          organization_id: string | null;
+          role: Database["public"]["Enums"]["user_role"] | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          avatar_url?: string | null;
+          created_at?: string | null;
+          department?: string | null;
+          email: string;
+          full_name?: string | null;
+          id: string;
+          organization_id?: string | null;
+          role?: Database["public"]["Enums"]["user_role"] | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          avatar_url?: string | null;
+          created_at?: string | null;
+          department?: string | null;
+          email?: string;
+          full_name?: string | null;
+          id?: string;
+          organization_id?: string | null;
+          role?: Database["public"]["Enums"]["user_role"] | null;
+          updated_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "profiles_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      roles: {
+        Row: {
+          created_at: string | null;
+          id: string;
+          name: string;
+          organization_id: string | null;
+          permissions: Json | null;
+        };
+        Insert: {
+          created_at?: string | null;
+          id?: string;
+          name: string;
+          organization_id?: string | null;
+          permissions?: Json | null;
+        };
+        Update: {
+          created_at?: string | null;
+          id?: string;
+          name?: string;
+          organization_id?: string | null;
+          permissions?: Json | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "roles_organization_id_fkey";
+            columns: ["organization_id"];
+            isOneToOne: false;
+            referencedRelation: "organizations";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
-    Functions: Record<string, never>;
+    Functions: {
+      is_admin: { Args: Record<string, never>; Returns: boolean };
+    };
     Enums: {
       user_role: "admin" | "manager" | "employee";
     };
+    CompositeTypes: Record<string, never>;
   };
-}
+};

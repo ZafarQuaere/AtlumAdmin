@@ -36,7 +36,7 @@ export function useRecentActions() {
             data.map((log) => ({
               id: log.id,
               title: log.description,
-              timestamp: formatRelativeTime(log.created_at),
+              timestamp: formatRelativeTime(log.created_at ?? new Date().toISOString()),
               category: log.category ?? "System",
               icon: mapActionIcon(log.action_type),
             }))
