@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,7 +29,6 @@ type LoginForm = z.infer<typeof loginSchema>;
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { signIn } = useAuth();
-  const router = useRouter();
 
   const {
     register,
@@ -46,17 +44,25 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginForm) => {
     setIsLoading(true);
-    const { error } = await signIn(data.email, data.password);
 
-    if (error) {
-      toast.error(error);
+    try {
+      const { error } = await signIn(data.email, data.password);
+
+      if (error) {
+        toast.error(error);
+        setIsLoading(false);
+        return;
+      }
+
+      toast.success("Welcome back!");
+      // Full navigation so middleware sees the new Supabase session cookies
+      window.location.assign("/");
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Sign in failed. Try again."
+      );
       setIsLoading(false);
-      return;
     }
-
-    toast.success("Welcome back!");
-    router.push("/");
-    router.refresh();
   };
 
   return (

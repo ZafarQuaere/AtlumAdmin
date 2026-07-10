@@ -43,7 +43,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     };
 
-    getUser();
+    void getUser();
 
     const {
       data: { subscription },
@@ -57,13 +57,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     if (!supabase) {
-      return { error: "Supabase is not configured. Add credentials to .env.local" };
+      return {
+        error: "Supabase is not configured. Add credentials to .env.local",
+      };
     }
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
+
     return { error: error?.message ?? null };
   };
 

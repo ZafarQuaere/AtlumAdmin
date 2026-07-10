@@ -86,6 +86,8 @@ npm start
 
 ## Deploy to Vercel (GitHub)
 
+See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for the full step-by-step guide (local preview + publish to Vercel).
+
 1. Push this repo to GitHub: `ZafarQuaere/AtlumAdmin`
 2. Go to [vercel.com/new](https://vercel.com/new)
 3. Import `ZafarQuaere/AtlumAdmin`

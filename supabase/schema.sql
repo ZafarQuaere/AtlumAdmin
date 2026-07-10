@@ -98,16 +98,39 @@ ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE roles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE activity_logs ENABLE ROW LEVEL SECURITY;
 
--- Helper: check if current user is admin
+-- Helper: check if current user is admin (SECURITY DEFINER avoids RLS recursion)
 CREATE OR REPLACE FUNCTION is_admin()
-RETURNS BOOLEAN AS $$
-BEGIN
-  RETURN EXISTS (
+RETURNS BOOLEAN
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = public
+STABLE
+AS $$
+  SELECT EXISTS (
     SELECT 1 FROM profiles
     WHERE id = auth.uid() AND role = 'admin'
   );
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$;
+
+CREATE OR REPLACE FUNCTION get_my_role()
+RETURNS user_role
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = public
+STABLE
+AS $$
+  SELECT role FROM profiles WHERE id = auth.uid();
+$$;
+
+CREATE OR REPLACE FUNCTION get_my_department()
+RETURNS TEXT
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = public
+STABLE
+AS $$
+  SELECT department FROM profiles WHERE id = auth.uid();
+$$;
 
 -- Organizations policies
 CREATE POLICY "Admins can manage organizations"
@@ -128,12 +151,9 @@ CREATE POLICY "Admins can manage all profiles"
 CREATE POLICY "Managers can view department profiles"
   ON profiles FOR SELECT
   USING (
-    EXISTS (
-      SELECT 1 FROM profiles manager
-      WHERE manager.id = auth.uid()
-      AND manager.role = 'manager'
-      AND manager.department = profiles.department
-    )
+    get_my_role() = 'manager'
+    AND department IS NOT NULL
+    AND department = get_my_department()
   );
 
 CREATE POLICY "Users can view own profile"

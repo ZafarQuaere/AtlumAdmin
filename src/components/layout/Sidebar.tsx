@@ -4,7 +4,7 @@ import {
   LayoutDashboard,
   Users,
   Shield,
-  Building2,
+  ClipboardList,
   BarChart3,
   Upload,
   HelpCircle,
@@ -19,7 +19,7 @@ const navItems = [
   { href: "/", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/users", icon: Users, label: "User Management" },
   { href: "/roles", icon: Shield, label: "Roles & Permissions" },
-  { href: "/settings", icon: Building2, label: "Organization Settings" },
+  { href: "/settings", icon: ClipboardList, label: "Create Task Settings" },
   { href: "/reports", icon: BarChart3, label: "Reports" },
 ];
 

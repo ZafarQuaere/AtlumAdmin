@@ -39,10 +39,9 @@ Mapped from the [Atlum Work OS PRD](../Atlum_WorkOS_PRD.md) §4.3:
 | **Dashboard** | Employee/manager counts, system health, productivity chart, recent actions log | **Partial** — layout and widgets built; employee/manager counts live from Supabase; chart and health metrics use mock data |
 | **User Management** | Searchable directory, bulk Excel/CSV import, role assignment | **Placeholder** — page shell only |
 | **Roles & Permissions** | Read-only view of fixed 3-role permission set | **Placeholder** — page shell only |
-| **Organization Settings** | Org name, timezone, language preference | **Placeholder** — page shell only |
+| **Create Task Settings** | Custom ticket form fields with mobile preview | **Core** — field toggles, preview, save via Supabase |
 | **Reports** | Basic ticket counts (total, completed, overdue) | **Placeholder** — page shell only |
 | **Bulk Excel Import** | Sole v1 method for adding users to an org | **UI only** — sidebar and dashboard CTAs present; server action stubbed |
-| **Task Configuration** | Custom ticket form fields with mobile preview | **Not started** — planned per PRD |
 | **Activity Audit Trail** | Recent admin actions on dashboard | **Partial** — reads from `activity_logs` table with mock fallback |
 
 ---
@@ -126,7 +125,7 @@ Hooks gracefully degrade to mock data when Supabase is not configured (local dev
 | `/` | Dashboard | Admin overview with stats, chart, and activity feed |
 | `/users` | User Management | Employee directory and access control |
 | `/roles` | Roles & Permissions | Fixed role permission reference |
-| `/settings` | Organization Settings | Org profile and preferences |
+| `/settings` | Create Task Settings | Task form field configuration with mobile preview |
 | `/reports` | Reports | Basic ticket analytics |
 
 ### Sidebar Footer
@@ -247,7 +246,7 @@ Priority order aligned with PRD v1 scope:
 3. **Organization Settings** — org name, timezone, language (English/Hindi)
 4. **Roles & Permissions** — read-only permission matrix for Admin/Manager/Employee
 5. **Reports** — ticket counts (total, completed, overdue)
-6. **Task Configuration** — custom field editor with mobile preview pane
+6. **Task Configuration (extended)** — add/edit/delete custom fields, tabs, drag reorder
 7. **Activity Logging** — wire server actions to `activity_logs` on all mutations
 8. **Live Dashboard Data** — replace mock productivity chart and system health with real metrics
 
