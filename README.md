@@ -136,6 +136,14 @@ src/
 └── types/               # TypeScript types
 ```
 
+## Feature Docs
+
+Per-feature documentation lives in [`docs/feature/`](./docs/feature/):
+
+| Doc | Feature |
+|-----|---------|
+| [`ADMIN_CREATE_TASK_SETTINGS_FEATURE.md`](./docs/feature/ADMIN_CREATE_TASK_SETTINGS_FEATURE.md) | Create Task Settings |
+
 ## Theme
 
 Uses the Atlum brand palette from AtlumApp:

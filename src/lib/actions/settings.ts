@@ -192,3 +192,104 @@ export async function saveTaskCreationSettingsAction(
     };
   }
 }
+
+// ---------------------------------------------------------------------------
+// WhatsApp settings
+// ---------------------------------------------------------------------------
+
+export async function getWhatsAppSettingsAction(): Promise<{
+  data: { enabled: boolean } | null;
+  error: string | null;
+}> {
+  try {
+    const { supabase, user } = await requireUser();
+    const organizationId = await resolveOrganizationId(supabase, user.id);
+
+    const { data: organization, error } = await supabase
+      .from("organizations")
+      .select("settings")
+      .eq("id", organizationId)
+      .single();
+
+    if (error) throw new Error(error.message);
+
+    const orgSettings =
+      organization.settings && typeof organization.settings === "object"
+        ? (organization.settings as Record<string, unknown>)
+        : {};
+
+    const whatsapp = orgSettings["whatsapp"] as
+      | Record<string, unknown>
+      | undefined;
+
+    // Missing key means enabled (existing orgs keep working)
+    const enabled =
+      whatsapp === undefined || whatsapp["enabled"] !== false;
+
+    return { data: { enabled }, error: null };
+  } catch (error) {
+    return {
+      data: null,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Failed to load WhatsApp settings",
+    };
+  }
+}
+
+export async function saveWhatsAppSettingsAction(enabled: boolean): Promise<{
+  data: { enabled: boolean } | null;
+  error: string | null;
+}> {
+  try {
+    const { supabase, user } = await requireUser();
+    const organizationId = await resolveOrganizationId(supabase, user.id);
+
+    const { data: organization, error: readError } = await supabase
+      .from("organizations")
+      .select("settings")
+      .eq("id", organizationId)
+      .single();
+
+    if (readError) throw new Error(readError.message);
+
+    const currentSettings =
+      organization.settings && typeof organization.settings === "object"
+        ? (organization.settings as Record<string, unknown>)
+        : {};
+
+    const { error: updateError } = await supabase
+      .from("organizations")
+      .update({
+        settings: {
+          ...currentSettings,
+          whatsapp: { enabled },
+        },
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", organizationId);
+
+    if (updateError) throw new Error(updateError.message);
+
+    await supabase.from("activity_logs").insert({
+      user_id: user.id,
+      action_type: "settings.whatsapp.update",
+      description: `WhatsApp bot ${enabled ? "enabled" : "disabled"} for organisation`,
+      category: "WhatsApp",
+      metadata: { enabled, organizationId },
+    });
+
+    revalidatePath("/settings");
+
+    return { data: { enabled }, error: null };
+  } catch (error) {
+    return {
+      data: null,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Failed to save WhatsApp settings",
+    };
+  }
+}
